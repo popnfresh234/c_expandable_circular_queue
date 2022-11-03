@@ -2,7 +2,7 @@
 
 queue_t* queue_create() {
   queue_t* q = malloc(sizeof(queue_t));
-  q->arr = malloc(5 * sizeof(int));
+  q->arr = calloc(5, sizeof(int));
   q->capacity = 5;
   q->num_els = 0;
   q->head = 0;
@@ -21,7 +21,7 @@ void queue_print(queue_t* q) {
 
 void queue_dbl_size(queue_t* q) {
   int new_capacity = 2 * q->capacity;
-  int* new_buff = malloc(new_capacity * sizeof(int));
+  int* new_buff = calloc(new_capacity, sizeof(int));
   int i = 0;
   while (!queue_is_empty(q)) {
     int next = queue_dequeue(q);
@@ -85,4 +85,5 @@ void main() {
   while (!queue_is_empty(q)) {
     printf("Dequeing: %d\n", queue_dequeue(q));
   }
+  queue_free(q);
 }
